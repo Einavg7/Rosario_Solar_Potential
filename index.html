@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>leaflet-map-simple</title>
+  <title>Rosario, Argentina Building Rooftop Solar Potential</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
 
@@ -20,7 +20,7 @@
 <body>
 
   <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">Rosario Buildings</div>
+  <div id="map-title">Rosario Rooftop Solar Potential</div>
   <div id="map"></div>
 
   <!-- Create the interactive map content with JavaScript (.js) -->
@@ -41,6 +41,17 @@
         OpenStreetMap</a> contributors, &copy;\
         <a href="https://carto.com/attribution">CARTO</a>'
   }).addTo(map);
+   
+//chosing a tileLayer
+ var TL = L.tileLayer(
+			"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+			{attribution: '&copy; <a href="http://' + 
+			'www.openstreetmap.org/copyright">OpenStreetMap</a>'}
+		).addTo(map);
+		
+ var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });
 
 var url = 'rosario_sp.geojson';
 
