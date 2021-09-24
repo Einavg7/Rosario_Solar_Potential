@@ -145,6 +145,8 @@
             };
         }
         var url = 'rosario_sp.geojson';
+	            // Add centroid variable
+        var centro = L.layerGroup()
 
         var myLayer = L.geoJSON({
             style: build_style,
@@ -181,9 +183,6 @@
         };
         legend.addTo(map);
 
-
-        // Add centroid variable
-        var centro = L.layerGroup()
 
         // Create Leaflet Control Object for Description
 
