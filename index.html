@@ -148,7 +148,7 @@
 	            // Add centroid variable
         var centro = L.layerGroup()
 
-        var myLayer = L.geoJSON({
+        var myLayer = L.geoJSON({url,
             style: build_style,
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
