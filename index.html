@@ -1,173 +1,206 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Rosario, Argentina Building Rooftop Solar Potential</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
+    <title>Rosario, Argentina Building Rooftop Solar Potential</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
 
-  <!-- Load Leaflet code library: see http://leafletjs.com/download.html -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Load Leaflet code library: see http://leafletjs.com/download.html -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-  <!-- Position the map and title with Cascading Style Sheet (CSS) -->
-  <style>
- body {
+    <!-- Position the map and title with Cascading Style Sheet (CSS) -->
+    <style>
+        body {
             padding: 0;
             margin: 0;
         }
-        html, body, #map {
+
+        html,
+        body,
+        #map {
             height: 100%;
             width: 100%;
         }
-		.popup {
+
+        .popup {
             text-align: center;
         }
-		.legend {
-			padding: 6px 8px;
-			background-color: rgba(255,255,255,0.8);
-			box-shadow: 0 0 15px rgba(0,0,0,0.2);
-			border-radius: 5px;
-			}
-			
-			.legend i {
-			width: 18px;
-			height: 18px;
-			float: left;
-			margin-right: 8px;
-			opacity: 0.7;
-			}
-			
-			div.legend.leaflet-control br {
-			clear: both;
-			}
-			
-			
-			.description {
-			font-size: 13px;
-			line-height: 18px;
-			color: #333333;
-			font-family: 'Open Sans', Helvetica, sans-serif;
-			padding: 5px 14px;
-			background-color: rgba(245,245,220,0.8) ;
-			box-shadow: 0 0 15px rgba(0,0,0,0.2);
-			border-radius: 5px;
-			max-width: 250px;
-			border: 1px solid grey;
-			}
 
-			.description p {
-			font-size: 14px;
-			line-height: 24px;
-			}
+        .legend {
+            padding: 6px 8px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
 
-			.description img {
-			max-width: 100px;
-			margin: auto;
-			display: block;
-  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
-  #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 4px 6px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
-	</style>
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        div.legend.leaflet-control br {
+            clear: both;
+        }
+
+
+        .description {
+            font-size: 13px;
+            line-height: 18px;
+            color: #333333;
+            font-family: 'Open Sans', Helvetica, sans-serif;
+            padding: 5px 14px;
+            background-color: rgba(245, 245, 220, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            max-width: 250px;
+            border: 1px solid grey;
+        }
+
+        .description p {
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        .description img {
+            max-width: 100px;
+            margin: auto;
+            display: block;
+
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+            }
+
+            #map-title {
+                position: relative;
+                margin-top: 10px;
+                margin-left: 50px;
+                float: left;
+                background-color: rgba(245, 245, 220, 0.8);
+            	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                border: 2px solid grey;
+                padding: 4px 6px;
+		font-family: 'Open Sans', Helvetica, sans-serif;
+                font-weight: bold;
+                font-size: 24px;
+                z-index: 800;
+            }
+    </style>
 </head>
+
 <body>
 
-  <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">Rosario, Argentina Building Rooftop Solar Potential</div>
-  <div id="map"></div>
+    <!-- Display the map and title with HTML division tags  -->
+    <div id="map-title">Rosario, Argentina Building Rooftop Solar Potential</div>
+    <div id="map"></div>
 
-  <!-- Create the interactive map content with JavaScript (.js) -->
-  <script>
+    <!-- Create the interactive map content with JavaScript (.js) -->
+    <script>
 
-  /* Set up the initial map center and zoom level */
-  var map = L.map('map', {
-    center: [-32.94682, -60.63932], // EDIT coordinates to re-center map
-    zoom: 13,  // EDIT from 1 (zoomed out) to 18 (zoomed in)
-    scrollWheelZoom: true,
-    tap: true,
-  });
+        /* Set up the initial map center and zoom level */
+        var map = L.map('map', {
+            center: [-32.94682, -60.63932], // EDIT coordinates to re-center map
+            zoom: 13,  // EDIT from 1 (zoomed out) to 18 (zoomed in)
+            scrollWheelZoom: true,
+            tap: true,
+        });
 
-  /* display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
-  L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://osm.org/copyright">\
+        /* display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
+        L.tileLayer(
+            'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://osm.org/copyright">\
         OpenStreetMap</a> contributors, &copy;\
         <a href="https://carto.com/attribution">CARTO</a>'
-  }).addTo(map);
-   
-//chosing a tileLayer
- var TL = L.tileLayer(
-			"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
-			{attribution: '&copy; <a href="http://' + 
-			'www.openstreetmap.org/copyright">OpenStreetMap</a>'}
-		).addTo(map);
-		
- var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    });
+        }).addTo(map);
 
-var url = 'rosario_sp.geojson';
+        //chosing a tileLayer
+        var TL = L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                attribution: '&copy; <a href="http://' +
+                    'www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }
+        ).addTo(map);
 
-var myLayer = L.geoJSON(null, {onEachFeature: function (feature, layer) {
-    layer.bindPopup('<h1>name:'+feature.properties.name+'</h1><p>mean: '+feature.properties._mean+'</p><p>usable_sr: '+feature.properties.usable_sr+'</p><p>elec_prod: '+feature.properties.elec_prod+'</p>');
-  }});
+        var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
 
-$.getJSON(url, function(data) {
-    myLayer.addData(data);
-});
+        var url = 'rosario_sp.geojson';
 
-  myLayer.addTo(map);
-	  
+        var myLayer = L.geoJSON(null, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup('<h1>name:' + feature.properties.name + '</h1><p>mean: ' + feature.properties._mean + '</p><p>usable_sr: ' + feature.properties.usable_sr + '</p><p>elec_prod: ' + feature.properties.elec_prod + '</p>');
+            }
+        });
 
-// Add centroid variable
-    var centro = L.layerGroup()
-    
-	  // Create Leaflet Control Object for Description
+        $.getJSON(url, function (data) {
+            myLayer.addData(data);
+        });
 
-var description = L.control({position: "topright"});
-
-// Function that runs when legend is added to map
-
-description.onAdd = function(map) {
-
-	// Create Div Element and Populate it with HTML
-	
-	var div = L.DomUtil.create("div", "description");		    
-    div.innerHTML = 
-        '<p>This is a webmap displaying solar potential for building rooftops in Rosario, Argentina</p>' +
-        'The building footprints were collected from OpenStreetMap and the solar potential was calculated using The World Bank global horizontal irradiance (GHI) layer<br>' +
-        'By  clicking the buildings you can see information about the solar and renewable electricity potential for each rooftop: <br><br>' +
-		'<ul>' +
-		'<li>Type of Building</li>' +
-        '<li>Mean GHI</li>' +
-		'<li>Electricity Produced</li>' +
-        '</ul>' +
-		'This map has a standard road map and a satellite image map. You can switch between the maps by clicking the menu located below the legend, on the upper left.' + '<br>' + 
-		'<hr>' +
-        'Created with the Leaflet library<br>';
-
-	// Return the Legend div containing the HTML content
-	
-	return div;
-
-};
-	  
-
-// Add Legend to Map
-
-description.addTo(map);
-
-// Layer control
-var baseMaps = {
-    "Map": TL,
-	"Imagery": imagery
-};
-var overlayMaps = {
-    "Centroid": centro
-    
-};
-L.control.layers(baseMaps, overlayMaps, {position: "topleft"}).addTo(map);
+        myLayer.addTo(map);
 
 
-  </script>
+        // Add centroid variable
+        var centro = L.layerGroup()
+
+        // Create Leaflet Control Object for Description
+
+        var description = L.control({ position: "topright" });
+
+        // Function that runs when legend is added to map
+
+        description.onAdd = function (map) {
+
+            // Create Div Element and Populate it with HTML
+
+            var div = L.DomUtil.create("div", "description");
+            div.innerHTML =
+                '<p>This is a webmap displaying solar potential for building rooftops in Rosario, Argentina</p>' +
+                'The building footprints were collected from OpenStreetMap and the solar potential was calculated using The World Bank global horizontal irradiance (GHI) layer<br>' +
+                'By  clicking the buildings you can see information about the solar and renewable electricity potential for each rooftop: <br><br>' +
+                '<ul>' +
+                '<li>Type of Building</li>' +
+                '<li>Mean GHI</li>' +
+                '<li>Electricity Produced</li>' +
+                '</ul>' +
+                'This map has a standard road map and a satellite image map. You can switch between the maps by clicking the menu located below the legend, on the upper left.' + '<br>' +
+                '<hr>' +
+                'Created with the Leaflet library<br>';
+
+            // Return the Legend div containing the HTML content
+
+            return div;
+
+        };
+
+
+        // Add Legend to Map
+
+        description.addTo(map);
+
+        // Layer control
+        var baseMaps = {
+            "Map": TL,
+            "Imagery": imagery
+        };
+        var overlayMaps = {
+            "Centroid": centro
+
+        };
+        L.control.layers(baseMaps, overlayMaps, { position: "topleft" }).addTo(map);
+
+
+    </script>
 </body>
+
 </html>
