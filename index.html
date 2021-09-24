@@ -65,8 +65,6 @@ $.getJSON(url, function(data) {
 
   myLayer.addTo(map);
 	  
-	  // Add centroid variable
-    var centro = L.layerGroup()
 	  
 	  // Create Leaflet Control Object for Description
 
@@ -80,19 +78,16 @@ description.onAdd = function(map) {
 	
 	var div = L.DomUtil.create("div", "description");		    
     div.innerHTML = 
-	 '<p><b>Population in New England Counties</b></p><hr>' +
-        '<p>This map shows 26 counties in New England.</p>' +
-        'Each polygon represents a different county. <br>' +
-        'By  clicking the polygons you can get information about the population living in each county: <br><br>' +
+        '<p>This is a webmap displaying solar potential for building rooftops in Rosario, Argentina</p>' +
+        'The building footprints were collected from OpenStreetMap and the solar potential was calculated using The World Bank global horizontal irradiance (GHI) layer<br>' +
+        'By  clicking the buildings you can see information about the solar and renewable electricity potential for each rooftop: <br><br>' +
 		'<ul>' +
-		'<li>Total Population</li>' +
-        '<li>Number of Men</li>' +
-		'<li>Number of Women</li>' +
+		'<li>Type of Building</li>' +
+        '<li>Mean GHI</li>' +
+		'<li>Electricity Produced</li>' +
         '</ul>' +
 		'This map has a standard road map and a satellite image map. You can switch between the maps by clicking the menu located below the legend, on the upper left.' + '<br>' + 
-		'<b>In addition, this menu has an option to display the centroid of each polygon by pressing the check box button.<br></b>' +
 		'<hr>' +
-		'The data was collected from Esri data and maps on January 2018<br>' + 
         'Created with the Leaflet library<br>';
 
 	// Return the Legend div containing the HTML content
@@ -110,11 +105,8 @@ var baseMaps = {
     "Map": TL,
 	"Imagery": imagery
 };
-var overlayMaps = {
-    "Centroid": centro
-    
-};
-L.control.layers(baseMaps, overlayMaps, {position: "topleft"}).addTo(map);
+
+L.control.layers(baseMaps, {position: "topleft"}).addTo(map);
 
 
   </script>
