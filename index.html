@@ -127,7 +127,11 @@
 
         var myLayer = L.geoJSON(null, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<h1>Building Name:' + feature.properties.name + '</h1><p>Mean GHI (W/m2): ' + feature.properties._mean + '</p><p>Usable Solar Power (kWh): ' + feature.properties.usable_sr + '</p><p>Electricity Production (kWh): ' + feature.properties.elec_prod + '</p>');
+                layer.bindPopup('<p>Building Name:' + feature.properties.name + 
+				'</p><p>Type of Building:' + feature.properties.type + 
+				'</p><p>Mean GHI (W/m2): ' + feature.properties._mean + 
+				'</p><p>Usable Solar Power (kWh): ' + feature.properties.usable_sr + 
+				'</p><p>Electricity Production (kWh): ' + feature.properties.elec_prod + '</p>');
             }
         });
 
