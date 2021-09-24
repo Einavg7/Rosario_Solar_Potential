@@ -122,17 +122,18 @@
         var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
+
+        let breaks = [-Infinity, 25333.76, 34248.60, 47132.85, 62606.10, 81277.84, 110115.58, 157131.12, 270478.81, Infinity];
+        let colors = ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#bd0026", "#800026"];
+
         function build_color(d) {
-            if (d > 25333.76) return "#ffffcc";
-            if (d > 34248.60) return "#ffeda0";
-            if (d > 47132.85) return "#fed976";
-            if (d > 62606.10) return "#feb24c";
-            if (d > 81277.84) return "#fd8d3c";
-            if (d > 110115.58) return "#fc4e2a";
-            if (d > 157131.12) return "#e31a1c";
-            if (d > 270478.81) return "#bd0026";
-            return "#800026";
+            for (let i = 0; i < breaks.length; i++) {
+                if (d > breaks[i] && d <= breaks[i + 1]) {
+                    return colors[i];
+                }
+            }
         }
+
 
         function build_style(feature) {
             return {
@@ -145,7 +146,8 @@
         }
         var url = 'rosario_sp.geojson';
 
-        var myLayer = L.geoJSON(null, {style:build_style,
+        var myLayer = L.geoJSON(null, {
+            style: build_style,
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p>Building Name:' + feature.properties.name +
                     '</p><p>Type of Building:' + feature.properties.type +
@@ -178,7 +180,7 @@
             var div = L.DomUtil.create("div", "description");
             div.innerHTML =
                 '<p>This is a webmap displaying solar potential for building rooftops in the city <b>Rosario, Argentina</b></p>' +
-                'The building footprints were collected from OpenStreetMap and the solar potential was calculated using The World Bank global horizontal irradiance (GHI) layer<br>' +
+                'The building footprints were collected from OpenStreetMap and the solar potential was calculated using The World Bank global horizontal irradiance (GHI) layer.<br>' +
                 'By  clicking the buildings you can see information about the solar and renewable electricity potential for each rooftop: <br><br>' +
                 '<ul>' +
                 '<li>Building Name</li>' +
