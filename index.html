@@ -149,11 +149,11 @@
         var myLayer = L.geoJSON({
             style: build_style,
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p>Building Name:' + feature.properties.name +
-                    '</p><p>Type of Building:' + feature.properties.type +
-                    '</p><p>Mean GHI (W/m2): ' + feature.properties._mean +
-                    '</p><p>Usable Solar Power (kWh): ' + feature.properties.usable_sr +
-                    '</p><p>Electricity Production (kWh): ' + feature.properties.elec_prod + '</p>');
+                layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
+                    '</p><p><b>Type of Building: </b>' + feature.properties.type +
+                    '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
+                    '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
+                    '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + '</p>');
             }
         });
 
@@ -201,6 +201,26 @@
         // Add Legend to Map
 
         description.addTo(map);
+
+        var legend = L.control({ position: "bottomleft" });
+
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create("div", "legend");
+            div.innerHTML =
+                '<i style="background-color: #ffffcc">' +
+                '</i>1059 - 25334 (kWh)<br>' +
+                '<i style="background-color: #ffeda0">' + '</i>25334 - 34249 (kWh)<br>' +
+                '<i style="background-color: #fed976">' + '</i>34249 - 47133 (kWh)<br>' +
+                '<i style="background-color: #feb24c">' + '</i>47133 - 62606 (kWh)<br>' +
+                '<i style="background-color: #fd8d3c">' + '</i>62606 - 81278 (kWh)<br>' +
+                '<i style="background-color: #fc4e2a">' + '</i>81278 - 110116 (kWh)<br>' +
+                '<i style="background-color: #e31a1c">' + '</i>110116 - 157131 (kWh)<br>' +
+                '<i style="background-color: #bd0026">' + '</i>157131 - 270479 (kWh)<br>' +
+                '<i style="background-color: #800026">' + '</i>270479 - 9788517 (kWh)<br>'
+            return div;
+        };
+        legend.addTo(map);
+
 
         // Layer control
         var baseMaps = {
