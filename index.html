@@ -146,7 +146,7 @@
         }
         var url = 'rosario_sp.geojson';
 
-        var myLayer = L.geoJSON(null, {
+        var myLayer = L.geoJSON({
             style: build_style,
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p>Building Name:' + feature.properties.name +
