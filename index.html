@@ -67,7 +67,7 @@
             line-height: 24px;
         }
 
-            /*
+        /*
 		#map-title {
                 position: relative;
                 margin-top: 10px;
@@ -122,16 +122,36 @@
         var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
+        function build_color(d) {
+            if (d > 25334) return "#ffffcc";
+            if (d > 34249) return "#ffeda0";
+            if (d > 47133) return "#fed976";
+            if (d > 62606) return "#feb24c";
+            if (d > 81278) return "#fd8d3c";
+            if (d > 110116) return "#fc4e2a";
+            if (d > 157131) return "#e31a1c";
+            if (d > 270479) return "#bd0026";
+            return "#800026";
+        }
 
+        function build_style(feature) {
+            return {
+                fillColor: build_color(feature.properties.elec_prod),
+                weight: 0.5,
+                opacity: 1,
+                color: "black",
+                fillOpacity: 0.7
+            };
+        }
         var url = 'rosario_sp.geojson';
 
-        var myLayer = L.geoJSON(null, {
+        var myLayer = L.geoJSON(null, {style:build_style,
             onEachFeature: function (feature, layer) {
-                layer.bindPopup('<p>Building Name:' + feature.properties.name + 
-				'</p><p>Type of Building:' + feature.properties.type + 
-				'</p><p>Mean GHI (W/m2): ' + feature.properties._mean + 
-				'</p><p>Usable Solar Power (kWh): ' + feature.properties.usable_sr + 
-				'</p><p>Electricity Production (kWh): ' + feature.properties.elec_prod + '</p>');
+                layer.bindPopup('<p>Building Name:' + feature.properties.name +
+                    '</p><p>Type of Building:' + feature.properties.type +
+                    '</p><p>Mean GHI (W/m2): ' + feature.properties._mean +
+                    '</p><p>Usable Solar Power (kWh): ' + feature.properties.usable_sr +
+                    '</p><p>Electricity Production (kWh): ' + feature.properties.elec_prod + '</p>');
             }
         });
 
@@ -161,10 +181,10 @@
                 'The building footprints were collected from OpenStreetMap and the solar potential was calculated using The World Bank global horizontal irradiance (GHI) layer<br>' +
                 'By  clicking the buildings you can see information about the solar and renewable electricity potential for each rooftop: <br><br>' +
                 '<ul>' +
-		'<li>Building Name</li>' +
+                '<li>Building Name</li>' +
                 '<li>Type of Building</li>' +
                 '<li>Mean GHI</li>' +
-		'<li>Usable Solar Power</li>' +
+                '<li>Usable Solar Power</li>' +
                 '<li>Electricity Production</li>' +
                 '</ul>' +
                 'This map has a standard road map and a satellite image map. You can switch between the maps by clicking the menu located below the legend, on the upper left.' + '<br>';
