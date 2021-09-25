@@ -148,7 +148,7 @@
 	            // Add centroid variable
         var centro = L.layerGroup()
 
-        var myLayer = L.geoJSON({data,{
+        var myLayer = L.geoJSON({data,
             style: build_style,
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
@@ -156,7 +156,7 @@
                     '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
                     '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
                     '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + '</p>');
-            }}
+            }
         });
 
         $.getJSON(url, function (data) {
