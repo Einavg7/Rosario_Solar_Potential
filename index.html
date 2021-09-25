@@ -161,7 +161,7 @@
 
         $.getJSON('rosario_sp.geojson', function (data) {
             myLayer = L.geoJSON(data,
-                { style: setStyle, onEachFeature: Base_pop }).addTo(map);
+                { style: build_style, onEachFeature: Base_pop }).addTo(map);
         });
 
         function Base_pop(feature, layer) {
@@ -172,7 +172,7 @@
                 '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + '</p>');
         };
 
-        myLayer.addTo(map);
+        //myLayer.addTo(map);
         /*var legend = L.control({ position: "topleft" });
 
         legend.onAdd = function (map) {
