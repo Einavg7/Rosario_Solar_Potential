@@ -66,7 +66,6 @@
             font-size: 14px;
             line-height: 24px;
         }
-	    
     </style>
 </head>
 
@@ -87,7 +86,7 @@
         });
 
         /* display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
-        L.tileLayer(
+        var carto = L.tileLayer(
             'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://osm.org/copyright">\
         OpenStreetMap</a> contributors, &copy;\
@@ -101,13 +100,8 @@
                 attribution: '&copy; <a href="http://' +
                     'www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }
-        ).addTo(map);
-        var carto = L.tileLayer(
-            'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://osm.org/copyright">\
-        OpenStreetMap</a> contributors, &copy;\
-        <a href="https://carto.com/attribution">CARTO</a>'
-        }).addTo(map);
+        );
+
         var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
@@ -135,7 +129,7 @@
         }
         // var url = 'rosario_sp.geojson';
         // Add centroid variable
-        //var centro = L.layerGroup()
+        var centro = L.layerGroup()
 
         /*  var myLayer = L.geoJSON({data,
               style: build_style,
@@ -220,15 +214,15 @@
 
         // Layer control
         var baseMaps = {
-            "OpenStreetMap": TL,
             "CartoDB Map": carto,
+            "OpenStreetMap": TL,
             "ESRI Imagery": imagery
         };
-        /*var overlayMaps = {
+        var overlayMaps = {
             "Centroid": centro
 
-        };*/
-        L.control.layers(baseMaps, { position: "topleft" }).addTo(map);
+        };
+        L.control.layers(baseMaps, overlayMaps { position: "topleft" }).addTo(map);
 
 
     </script>
