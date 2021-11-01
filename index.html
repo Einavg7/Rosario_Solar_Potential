@@ -61,6 +61,7 @@
             max-width: 300px;
             border: 1px solid grey;
         }
+
         .description img {
             width: 100px;
             height: 75px;
@@ -68,13 +69,15 @@
             display: block;
             float: left;
         }
+
         .description img.two {
             width: 75px;
             height: 75px;
             margin: auto;
             display: flex;
             text-align: right;
-            }
+        }
+
         .description p {
             font-size: 12px;
             line-height: 14px;
@@ -144,21 +147,21 @@
         // var url = 'data/rosario_sp.geojson';
         // Add centroid variable
         var centro = L.layerGroup()
-        
-        function Base_pop(feature, layer) {
-            layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
-                '</p><p><b>Type of Building: </b>' + feature.properties.type +
-                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', {maximumFractionDigits:2}) +
-                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', {maximumFractionDigits:2}) +
-                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', {maximumFractionDigits:2}) + '</p>');
-        };
-        
+
         $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
             myLayer = L.geoJSON(data,
                 { style: build_style, onEachFeature: Base_pop }).addTo(map);
         });
 
-        
+        function Base_pop(feature, layer) {
+            layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
+                '</p><p><b>Type of Building: </b>' + feature.properties.type +
+                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '</p>');
+        };
+
+
         function build_style2(feature) {
             return {
                 fillColor: build_color(feature.properties.elec_prod),
@@ -168,21 +171,20 @@
                 fillOpacity: 0.7
             };
         }
-        function Muni_pop(feature, layer) {
-            layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
-                '</p><p><b>Type of Building: </b>' + feature.properties.type +
-                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', {maximumFractionDigits:2})+
-                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', {maximumFractionDigits:2}) +
-                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', {maximumFractionDigits:2}) + 
-                '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu.toLocaleString('en-US', {maximumFractionDigits:2}) + 
-                '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec.toLocaleString('en-US', {maximumFractionDigits:2}) + '</p>');
-        };
-        
+
         $.getJSON('data/ros_muni.geojson', function (data) {
             muniLayer = L.geoJSON(data,
                 { style: build_style2, onEachFeature: Muni_pop }).addTo(map);
         });
-        
+        function Muni_pop(feature, layer) {
+            layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
+                '</p><p><b>Type of Building: </b>' + feature.properties.type +
+                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '</p>');
+        };
         //myLayer.addTo(map);
         var legend = L.control({ position: "topleft" });
 
@@ -216,7 +218,7 @@
 
             var div = L.DomUtil.create("div", "description");
             div.innerHTML =
-                '<p><h><b>Rosario, Argentina Solar Potential Map</b></h><br></p>' + 
+                '<p><h><b>Rosario, Argentina Solar Potential Map</b></h><br></p>' +
                 'This is a webmap displaying solar potential for building rooftops in the city Rosario, Argentina. ' +
                 'The building footprints were collected from OpenStreetMap (OSM). The solar potential was calculated using a global horizontal irradiance (GHI) layer from The Global Solar Atlas, created by The World Bank. ' +
                 'By  clicking the buildings you can see the following information:<br>' +
@@ -229,7 +231,7 @@
                 '</ul>' +
                 'The buildings outlined in <b style="color:blue">blue</b> are municipal buildings. ' +
                 'For these buildings you can see additional information:<br>' +
-                '<ul>'+
+                '<ul>' +
                 '<li>Electricity Consumed (kWh)- annual electricity consumption of the building provided by the city of Rosario</li>' +
                 '<li>Renewable Electricity (kWh)- the renewable electricity balance for the building</li>' +
                 '</ul>' +
