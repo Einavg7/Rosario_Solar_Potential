@@ -11,8 +11,8 @@ The web map was built using the libraries [jQuery API](https://api.jquery.com/),
 The web map is available [here](https://einavg7.github.io/Rosario_Solar_Potential/).
 2. The ```data``` folder includes the building polygon layers for the web map. 
 3. The ```image``` folder includes images used for the web map.
-4. The ```QGIS``` folder includes the ```rosario.qgz``` project and the shapefiles used in the project (see the floder ```QGIS/README.md```).  
-5. The ```sampling``` folder includes a R Markdown code for the sampling analysis (see the floder ```sampling/README.md```). 
+4. The ```QGIS``` folder includes the ```rosario.qgz``` project and the shapefiles used in the project (see ```QGIS/README.md```).  
+5. The ```sampling``` folder includes a R Markdown code for the sampling analysis (see ```sampling/README.md```). 
 
 ## License
 MIT
