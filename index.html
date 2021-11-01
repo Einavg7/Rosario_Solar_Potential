@@ -149,13 +149,17 @@
             myLayer = L.geoJSON(data,
                 { style: build_style, onEachFeature: Base_pop }).addTo(map);
         });
-
+        function formatNumber(num) {
+            return num
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
         function Base_pop(feature, layer) {
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
-                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
-                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
-                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + '</p>');
+                '</p><p><b>Mean GHI (W/m2): </b>' + formatNumber(feature.properties._mean) +
+                '</p><p><b>Usable Solar Power (kWh): </b>' + formatNumber(feature.properties.usable_sr) +
+                '</p><p><b>Electricity Production (kWh): </b>' + formatNumber(feature.properties.elec_prod) + '</p>');
         };
         
         function build_style2(feature) {
@@ -176,10 +180,10 @@
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
                 '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
-                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
-                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + 
-                '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu + 
-                '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec + '</p>');
+                '</p><p><b>Usable Solar Power (kWh): </b>' + formatNumber(feature.properties.usable_sr) +
+                '</p><p><b>Electricity Production (kWh): </b>' + formatNumber(feature.properties.elec_prod) + 
+                '</p><p><b>Electricity Consumed (kWh): </b>' + formatNumber(feature.properties.elec_consu) + 
+                '</p><p><b>Renewable Electricity (kWh): </b>' + formatNumber(feature.properties.rene_elec) + '</p>');
         };
 
         //myLayer.addTo(map);
