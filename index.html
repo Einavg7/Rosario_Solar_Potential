@@ -140,18 +140,7 @@
         // var url = 'data/rosario_sp.geojson';
         // Add centroid variable
         var centro = L.layerGroup()
-
-        /*  var myLayer = L.geoJSON({data,
-              style: build_style,
-              onEachFeature: function (feature, layer) {
-                  layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
-                      '</p><p><b>Type of Building: </b>' + feature.properties.type +
-                      '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
-                      '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
-                      '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + '</p>');
-              }
-          });*/
-
+        
         $.getJSON('data/rosario_sp.geojson', function (data) {
             myLayer = L.geoJSON(data,
                 { style: build_style, onEachFeature: Base_pop }).addTo(map);
@@ -163,6 +152,30 @@
                 '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
                 '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
                 '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + '</p>');
+        };
+        
+        function build_style2(feature) {
+            return {
+                fillColor: build_color(feature.properties.elec_prod),
+                weight: 5,
+                opacity: 1,
+                color: "Blue",
+                fillOpacity: 0.7
+            };
+        }
+        $.getJSON('data/ros_muni.geojson', function (data) {
+            muniLayer = L.geoJSON(data,
+                { style: build_style2, onEachFeature: Muni_pop }).addTo(map);
+        });
+        
+         function Muni_pop(feature, layer) {
+            layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
+                '</p><p><b>Type of Building: </b>' + feature.properties.type +
+                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
+                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr +
+                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod + 
+                '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu + 
+                '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec + '</p>');
         };
 
         //myLayer.addTo(map);
