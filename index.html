@@ -158,7 +158,9 @@
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
                 '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
                 '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
-                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '</p>');
+                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', { maximumFractionDigits: 2 }) + 
+                '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
+                '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '</p>');
         };
 
 
@@ -174,17 +176,17 @@
 
         $.getJSON('data/ros_muni.geojson', function (data) {
             muniLayer = L.geoJSON(data,
-                { style: build_style2, onEachFeature: Muni_pop }).addTo(map);
+                { style: build_style2, onEachFeature: Base_pop }).addTo(map);
         });
-        function Muni_pop(feature, layer) {
-            munilayer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
+      /*  function Muni_pop(feature, layer) {
+            layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
                 '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
                 '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
                 '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
                 '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu.toLocaleString('en-US', { maximumFractionDigits: 2 }) +
                 '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '</p>');
-        };
+        };*/
         //myLayer.addTo(map);
         var legend = L.control({ position: "topleft" });
 
