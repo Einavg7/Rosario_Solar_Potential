@@ -145,17 +145,6 @@
         // Add centroid variable
         var centro = L.layerGroup()
         
-        /*function formatNumber(num) {
-            return num
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-        }*/
-        
-        $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
-            myLayer = L.geoJSON(data,
-                { style: build_style, onEachFeature: Base_pop }).addTo(map);
-        });
-
         function Base_pop(feature, layer) {
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
@@ -163,6 +152,12 @@
                 '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', {maximumFractionDigits:2}) +
                 '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', {maximumFractionDigits:2}) + '</p>');
         };
+        
+        $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
+            myLayer = L.geoJSON(data,
+                { style: build_style, onEachFeature: Base_pop }).addTo(map);
+        });
+
         
         function build_style2(feature) {
             return {
@@ -173,7 +168,7 @@
                 fillOpacity: 0.7
             };
         }
-                 function Muni_pop(feature, layer) {
+        function Muni_pop(feature, layer) {
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
                 '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', {maximumFractionDigits:2})+
