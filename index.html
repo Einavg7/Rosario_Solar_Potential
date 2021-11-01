@@ -145,11 +145,11 @@
         // Add centroid variable
         var centro = L.layerGroup()
         
-        function formatNumber(num) {
+        /*function formatNumber(num) {
             return num
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-        }
+        }*/
         
         $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
             myLayer = L.geoJSON(data,
@@ -159,9 +159,9 @@
         function Base_pop(feature, layer) {
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
-                '</p><p><b>Mean GHI (W/m2): </b>' + formatNumber(feature.properties._mean) +
-                '</p><p><b>Usable Solar Power (kWh): </b>' + formatNumber(feature.properties.usable_sr) +
-                '</p><p><b>Electricity Production (kWh): </b>' + formatNumber(feature.properties.elec_prod) + '</p>');
+                '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean.toLocaleString('en-US', {maximumFractionDigits:2}) +
+                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', {maximumFractionDigits:2}) +
+                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', {maximumFractionDigits:2}) + '</p>');
         };
         
         function build_style2(feature) {
@@ -182,10 +182,10 @@
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
                 '</p><p><b>Mean GHI (W/m2): </b>' + feature.properties._mean +
-                '</p><p><b>Usable Solar Power (kWh): </b>' + formatNumber(feature.properties.usable_sr) +
-                '</p><p><b>Electricity Production (kWh): </b>' + formatNumber(feature.properties.elec_prod) + 
-                '</p><p><b>Electricity Consumed (kWh): </b>' + formatNumber(feature.properties.elec_consu) + 
-                '</p><p><b>Renewable Electricity (kWh): </b>' + formatNumber(feature.properties.rene_elec) + '</p>');
+                '</p><p><b>Usable Solar Power (kWh): </b>' + feature.properties.usable_sr.toLocaleString('en-US', {maximumFractionDigits:2}) +
+                '</p><p><b>Electricity Production (kWh): </b>' + feature.properties.elec_prod.toLocaleString('en-US', {maximumFractionDigits:2}) + 
+                '</p><p><b>Electricity Consumed (kWh): </b>' + feature.properties.elec_consu.toLocaleString('en-US', {maximumFractionDigits:2}) + 
+                '</p><p><b>Renewable Electricity (kWh): </b>' + feature.properties.rene_elec.toLocaleString('en-US', {maximumFractionDigits:2}) + '</p>');
         };
 
         //myLayer.addTo(map);
@@ -195,7 +195,7 @@
             var div = L.DomUtil.create("div", "legend");
             div.innerHTML =
                 '<i style="background-color: #ffffcc">' +
-                '</i>1059 - 25334 (kWh)<br>' +
+                '</i>1,059 - 25,334 (kWh)<br>' +
                 '<i style="background-color: #ffeda0">' + '</i>25,334 - 34,249 (kWh)<br>' +
                 '<i style="background-color: #fed976">' + '</i>34,249 - 47,133 (kWh)<br>' +
                 '<i style="background-color: #feb24c">' + '</i>47,133 - 62,606 (kWh)<br>' +
