@@ -145,15 +145,17 @@
         // Add centroid variable
         var centro = L.layerGroup()
         
-        $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
-            myLayer = L.geoJSON(data,
-                { style: build_style, onEachFeature: Base_pop }).addTo(map);
-        });
         function formatNumber(num) {
             return num
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
+        
+        $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
+            myLayer = L.geoJSON(data,
+                { style: build_style, onEachFeature: Base_pop }).addTo(map);
+        });
+
         function Base_pop(feature, layer) {
             layer.bindPopup('<p><b>Building Name: </b>' + feature.properties.name +
                 '</p><p><b>Type of Building: </b>' + feature.properties.type +
@@ -194,14 +196,14 @@
             div.innerHTML =
                 '<i style="background-color: #ffffcc">' +
                 '</i>1059 - 25334 (kWh)<br>' +
-                '<i style="background-color: #ffeda0">' + '</i>25334 - 34249 (kWh)<br>' +
-                '<i style="background-color: #fed976">' + '</i>34249 - 47133 (kWh)<br>' +
-                '<i style="background-color: #feb24c">' + '</i>47133 - 62606 (kWh)<br>' +
-                '<i style="background-color: #fd8d3c">' + '</i>62606 - 81278 (kWh)<br>' +
-                '<i style="background-color: #fc4e2a">' + '</i>81278 - 110116 (kWh)<br>' +
-                '<i style="background-color: #e31a1c">' + '</i>110116 - 157131 (kWh)<br>' +
-                '<i style="background-color: #bd0026">' + '</i>157131 - 270479 (kWh)<br>' +
-                '<i style="background-color: #800026">' + '</i>270479 - 9788517 (kWh)<br>'
+                '<i style="background-color: #ffeda0">' + '</i>25,334 - 34,249 (kWh)<br>' +
+                '<i style="background-color: #fed976">' + '</i>34,249 - 47,133 (kWh)<br>' +
+                '<i style="background-color: #feb24c">' + '</i>47,133 - 62,606 (kWh)<br>' +
+                '<i style="background-color: #fd8d3c">' + '</i>62,606 - 81,278 (kWh)<br>' +
+                '<i style="background-color: #fc4e2a">' + '</i>81,278 - 110,116 (kWh)<br>' +
+                '<i style="background-color: #e31a1c">' + '</i>110,116 - 157,131 (kWh)<br>' +
+                '<i style="background-color: #bd0026">' + '</i>157,131 - 270,479 (kWh)<br>' +
+                '<i style="background-color: #800026">' + '</i>270,479 - 9,788,517 (kWh)<br>'
             return div;
         };
         legend.addTo(map);
