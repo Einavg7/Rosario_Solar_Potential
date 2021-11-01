@@ -141,7 +141,7 @@
         // Add centroid variable
         var centro = L.layerGroup()
         
-        $.getJSON('data/rosario_sp.geojson', function (data) {
+        $.getJSON('data/ros_osm_wmuni.geojson', function (data) {
             myLayer = L.geoJSON(data,
                 { style: build_style, onEachFeature: Base_pop }).addTo(map);
         });
