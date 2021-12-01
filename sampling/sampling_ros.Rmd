@@ -1,7 +1,7 @@
 ---
 title: "Sampling Rosario"
 author: "Einav Grinberg"
-date: "10/18/2021"
+date: "`r Sys.Date()`"
 output: bookdown::html_document2
 ---
 
@@ -83,7 +83,7 @@ mapview(rosario_poly,  map.types =  "CartoDB.VoyagerLabelsUnder", alpha.regions 
 ## Sample 1 computations
 
 Calculation of the sample mean is represented by $\overline{y}$.
-Calculation of the sample variance is represented by $s$.
+Calculation of the sample variance is represented by $s^2$.
 
 ```{r sample 1 c, warning=FALSE, echo=FALSE}
 boxplot(sample1$elec_prod_mwh, horizontal=TRUE, main="Sample 1", xlab = "Renewable Electricity Production Potential (mWh)")
